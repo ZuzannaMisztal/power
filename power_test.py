@@ -35,7 +35,7 @@ class PowerTest(unittest.TestCase):
         self.assertEqual(power(4, 0.5), 2)
 
     def test_both_are_negative(self):
-        self.assertEqual(power(-2, -2), -2**-2)
+        self.assertEqual(power(-2, -2), (-2)**-2)
 
     def test_both_floating(self):
         self.assertEqual(power(1/8, 1/3))

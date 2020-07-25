@@ -1,6 +1,6 @@
 import unittest
 
-from power import power
+from power import power, ToHardEquationError
 
 
 class PowerTest(unittest.TestCase):
@@ -22,23 +22,25 @@ class PowerTest(unittest.TestCase):
     def test_random_numbers(self):
         self.assertEqual(power(5, 3), 5**3)
 
-    def test_negative_numbers(self):
+    def test_negative_base(self):
         self.assertEqual(power(-2, 3), -8)
 
     def test_negative_exponent(self):
         self.assertEqual(power(4, -2), 4**-2)
 
-    def test_floating_number(self):
+    def test_floating_base(self):
         self.assertEqual(power(0.5, 2), 0.25)
 
     def test_floating_exponent(self):
-        self.assertEqual(power(4, 0.5), 2)
+        with self.assertRaises(ToHardEquationError):
+            power(4, 0.5)
 
     def test_both_are_negative(self):
         self.assertEqual(power(-2, -2), (-2)**-2)
 
     def test_both_floating(self):
-        self.assertEqual(power(1/8, 1/3))
+        with self.assertRaises(ToHardEquationError):
+            power(1/8, 1/3)
 
     def test_0_to_negative_raises_exception(self):
         with self.assertRaises(ZeroDivisionError):

@@ -1,15 +1,15 @@
-def power(x, y):
-    if y == 0:
+class ToHardEquationError(Exception):
+    pass
+
+
+def power(base, exp):
+    if exp == 0:
         return 1
-    if x == 0 and y < 0:
+    if base == 0 and exp < 0:
         raise ZeroDivisionError
-    if isinstance(y, int) and y > 0:
-        result = x
-        for i in range(y - 1):
-            result *= x
-        return result
-    if isinstance(y, int) and y < 0:
-        result = 1/x
-        for i in range(-y - 1):
-            result /= x
-        return result
+    if isinstance(exp, int):
+        result = base
+        for _ in range(exp - 1):
+            result *= base
+        return result if exp > 0 else 1 / (result * base)
+    raise ToHardEquationError
